@@ -11,12 +11,21 @@ RUN apk update && \
 # RUN echo 'echo "gotty"' > /etc/hostname
 
 RUN echo 'echo ""' > /root/.bashrc && \
-    echo 'echo "Nothing is started in the background."' >> /root/.bashrc && \
+    echo 'echo "Nothing is started in the background(yet)."' >> /root/.bashrc && \
     echo 'echo "Run htop command to display system info."' >> /root/.bashrc && \
     echo 'echo "Other commands: jq, vim, lsof, lncli"' >> /root/.bashrc && \
+    echo 'echo "Files are persisted in the /data folder, /data/bin for execs. Run this."' >> /root/.bashrc && \
+    echo 'echo "source /data/setpath"' >> /root/.bashrc  && \
     echo 'echo ""' >> /root/.bashrc  && \
 #    echo "export PS1='\h:\w\$ '" >> /root/.bashrc
     echo "export PS1='gotty:\w\$ '" >> /root/.bashrc
+
+#RUN mkdir -p /data/bin
+
+#RUN echo "echo '#!/bin/bash'" > /data/setpath && \
+#    echo "echo 'export PATH=/data/bin:$PATH'" >> /data/setpath
+
+#RUN chmod a+x /data/setpath
 
 WORKDIR /root
 ADD ./docker_entrypoint.sh /usr/bin/docker_entrypoint.sh
